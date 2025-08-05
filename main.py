@@ -102,11 +102,9 @@ def run_multiprocessing_version(file_paths, keywords):
     end = time.time()
     return dict(final_result), end - start
 
-if __name__ == "__main__":
-    import pandas as pd
-    import ace_tools as tools
+import pandas as pd
 
-    # Run both versions
+if __name__ == "__main__":
     thread_result, thread_time = run_threading_version(file_paths, keywords)
     process_result, process_time = run_multiprocessing_version(file_paths, keywords)
 
@@ -122,5 +120,5 @@ if __name__ == "__main__":
         "Results": [thread_result, process_result]
     })
 
-    tools.display_dataframe_to_user(name="Результати пошуку ключових слів", dataframe=df)
-
+    print("\n--- Підсумкова таблиця ---")
+    print(df)

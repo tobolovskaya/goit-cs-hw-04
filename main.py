@@ -102,23 +102,25 @@ def run_multiprocessing_version(file_paths, keywords):
     end = time.time()
     return dict(final_result), end - start
 
-# Run both versions
-thread_result, thread_time = run_threading_version(file_paths, keywords)
-process_result, process_time = run_multiprocessing_version(file_paths, keywords)
+if __name__ == "__main__":
+    import pandas as pd
+    import ace_tools as tools
 
-print("Threading result:", thread_result)
-print("Threading time:", thread_time)
+    # Run both versions
+    thread_result, thread_time = run_threading_version(file_paths, keywords)
+    process_result, process_time = run_multiprocessing_version(file_paths, keywords)
 
-print("Multiprocessing result:", process_result)
-print("Multiprocessing time:", process_time)
+    print("Threading result:", thread_result)
+    print("Threading time:", thread_time)
 
-import pandas as pd
-import ace_tools as tools
+    print("Multiprocessing result:", process_result)
+    print("Multiprocessing time:", process_time)
 
-df = pd.DataFrame({
-    "Method": ["Threading", "Multiprocessing"],
-    "Time (s)": [thread_time, process_time],
-    "Results": [thread_result, process_result]
-})
+    df = pd.DataFrame({
+        "Method": ["Threading", "Multiprocessing"],
+        "Time (s)": [thread_time, process_time],
+        "Results": [thread_result, process_result]
+    })
 
-tools.display_dataframe_to_user(name="Результати пошуку ключових слів", dataframe=df)
+    tools.display_dataframe_to_user(name="Результати пошуку ключових слів", dataframe=df)
+
